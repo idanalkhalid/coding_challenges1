@@ -39,14 +39,9 @@ class UpdateUserPassword
 
     public function asController(ActionRequest $request)
     {
-        $validated = $request->validate([
-            'current_password' => ['required', 'current_password'],
-            'password' => ['required', Password::defaults(), 'confirmed'],
-        ]);
-
         $this->handle(
             $request->user(),
-            $request->get($validated['password'])
+            $request->get('password')
         );
 
         return redirect()->back();
